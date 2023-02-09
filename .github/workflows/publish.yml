@@ -22,4 +22,4 @@ jobs:
         with:
             arguments: publish
         env:
-            GITHUB_TOKEN: ${{ secrets.GHP_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
