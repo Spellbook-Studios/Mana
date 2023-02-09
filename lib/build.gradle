@@ -30,6 +30,8 @@ publishing {
       }
       publications {
         gpr(MavenPublication) {
+            groupId 'dk.sebsa'
+            artifactId 'Mana'
           from(components.java)
         }
       }
