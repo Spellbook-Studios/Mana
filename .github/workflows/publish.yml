@@ -3,6 +3,7 @@ name: CI - Publish Packages
 on:
     push:
         branches: [ "main" ]
+
 jobs:
     publish:
         runs-on: ubuntu-latest
