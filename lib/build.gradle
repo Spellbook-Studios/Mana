@@ -13,7 +13,8 @@ plugins {
 }
 
 version = '1.0-SNAPSHOT'
-
+artifactId = 'mana'
+groupId = 'dk.sebsa'
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -31,7 +32,7 @@ publishing {
       publications {
         gpr(MavenPublication) {
             groupId 'dk.sebsa'
-            artifactId 'Mana'
+            artifactId 'mana'
           from(components.java)
         }
       }
