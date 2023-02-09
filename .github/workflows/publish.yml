@@ -2,7 +2,7 @@
 name: CI - Publish Packages
 on:
     push:
-        branches: [ "main" ]
+        branches: [ "main", "ghp_actions" ]
 
 jobs:
     publish:
