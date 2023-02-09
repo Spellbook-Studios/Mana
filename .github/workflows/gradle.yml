@@ -8,8 +8,6 @@
 name: CI - Gen artifacts
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
