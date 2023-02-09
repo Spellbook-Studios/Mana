@@ -6,7 +6,6 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment: Gradle Publish
     permissions:
       contents: read
       packages: write
