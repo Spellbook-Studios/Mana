@@ -32,5 +32,6 @@ jobs:
         arguments: lib:build
     - uses: actions/upload-artifact@v3
       with:
-        name: Package
-        path: lib/build/libs
+        name: Mana Jars
+        path: lib/build/libs/*.jar
+        if-no-files-found: error
