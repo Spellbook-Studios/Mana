@@ -62,7 +62,28 @@ publishing {
             pom {
                 artifactId 'mana'
                 packaging 'jar'
-                description ' All in one logging system '
+                name = "Mana"
+                description = "All in one logging system"
+                url = "https://github.com/Spellbook-Studios/Mana"
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'https://raw.githubusercontent.com/Spellbook-Studios/Mana/main/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'sebs'
+                        name = 'Sebastian August Snoer'
+                        email = 'ssnoer@proton.me'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:git://github.com/Spellbook-Studios/Mana.git'
+                    developerConnection = 'scm:git:ssh://github.com/Spellbook-Studios/Mana.git'
+                    url = 'https://github.com/Spellbook-Studios/Mana'
+                }
             }
         }
     }
