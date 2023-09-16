@@ -4,7 +4,7 @@ pipeline {
         ossrhSignKeyFile=credentials('ossrh-plw-signing-keyringfile')
     }
 
-    agent: any
+    agent any
 
     stages {
         stage('Build') {
@@ -16,6 +16,7 @@ pipeline {
             }
         }
         stage('Deploy') {
+            when { anyOf { branch 'main' } }
             steps {
                 withGradle {
                     sh '''
