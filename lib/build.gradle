@@ -13,7 +13,7 @@ plugins {
     id 'signing'
 }
 
-version = '1.0b'
+version = '1.0c-SNAPSHOT'
 group = 'dk.sebsa'
 archivesBaseName = 'mana'
 
