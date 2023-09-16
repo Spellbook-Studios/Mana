@@ -38,61 +38,63 @@ artifacts {
 
 
 // Publishing
-publishing {
-    repositories {
-        maven {
-            name = "OSSRH"
-            def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-            def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+if (project.hasProperty('ossrhUsername') && project.hasProperty('ossrhPassword')) {
+    publishing {
+        repositories {
+            maven {
+                name = "OSSRH"
+                def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
 
-            credentials {
-                username = ossrhUsername
-                password = ossrhPassword
+                credentials {
+                    username = ossrhUsername
+                    password = ossrhPassword
+                }
+            }
+        }
+
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+                artifact javadocJar
+                artifact sourcesJar
+
+                pom {
+                    artifactId 'mana'
+                    packaging 'jar'
+                    name = "Mana"
+                    description = "All in one logging system"
+                    url = "https://github.com/Spellbook-Studios/Mana"
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'https://raw.githubusercontent.com/Spellbook-Studios/Mana/main/LICENSE'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'sebs'
+                            name = 'Sebastian August Snoer'
+                            email = 'ssnoer@proton.me'
+                        }
+                    }
+
+                    scm {
+                        connection = 'scm:git:git://github.com/Spellbook-Studios/Mana.git'
+                        developerConnection = 'scm:git:ssh://github.com/Spellbook-Studios/Mana.git'
+                        url = 'https://github.com/Spellbook-Studios/Mana'
+                    }
+                }
             }
         }
     }
 
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifact javadocJar
-            artifact sourcesJar
-
-            pom {
-                artifactId 'mana'
-                packaging 'jar'
-                name = "Mana"
-                description = "All in one logging system"
-                url = "https://github.com/Spellbook-Studios/Mana"
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'https://raw.githubusercontent.com/Spellbook-Studios/Mana/main/LICENSE'
-                    }
-                }
-                developers {
-                    developer {
-                        id = 'sebs'
-                        name = 'Sebastian August Snoer'
-                        email = 'ssnoer@proton.me'
-                    }
-                }
-
-                scm {
-                    connection = 'scm:git:git://github.com/Spellbook-Studios/Mana.git'
-                    developerConnection = 'scm:git:ssh://github.com/Spellbook-Studios/Mana.git'
-                    url = 'https://github.com/Spellbook-Studios/Mana'
-                }
-            }
+    if (!version.endsWith("SNAPSHOT")) {
+        signing {
+            sign publishing.publications.mavenJava
         }
+    } else {
+        signing.required = false
     }
-}
-
-if (!version.endsWith("SNAPSHOT")) {
-    signing {
-        sign publishing.publications.mavenJava
-    }
-} else {
-    signing.required = false
 }
