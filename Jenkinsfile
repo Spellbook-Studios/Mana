@@ -4,6 +4,8 @@ pipeline {
         ossrhSignKeyFile=credentials('ossrh-plw-signing-keyringfile')
     }
 
+    agent: any
+
     stages {
         stage('Build') {
             steps {
