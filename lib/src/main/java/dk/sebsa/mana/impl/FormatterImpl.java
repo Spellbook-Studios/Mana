@@ -52,10 +52,12 @@ public class FormatterImpl implements LogFormatter {
 
     /**
      * FormatterImpl with default log formats: (%s is the log string)
+     * <ul>
      * <li> formatTrace = "TRC: %s"; </li>
      * <li> formatLog = "LOG: %s"; </li>
      * <li> formatWarn = "WARN: %s"; </li>
      * <li> formatErr = "ERR: %s"; </li>
+     * </ul>
      */
     public FormatterImpl() {
         formatDate = false;
