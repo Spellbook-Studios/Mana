@@ -39,10 +39,10 @@ public class FormatterImpl implements LogFormatter {
      * @param fe The format for error level messages
      */
     public FormatterImpl(String ft, String fl, String fw, String fe) {
-        this.formatLog = fl.replace("%ft", ft).replace("%fw", fw).replace("%fe", fe);
-        this.formatTrace = ft.replace("%fl", fl).replace("%fw", fw).replace("%fe", fe);
-        this.formatWarn = fw.replace("%fl", fl).replace("%ft", ft).replace("%fe", fe);
-        this.formatErr = fe.replace("%fl", fl).replace("%fw", fw).replace("%ft", ft);
+        this.formatLog = fl.replace("%ft", ft).replace("%fw", fw).replace("%fe", fe).replace("%esc","\u001B");
+        this.formatTrace = ft.replace("%fl", fl).replace("%fw", fw).replace("%fe", fe).replace("%esc","\u001B");
+        this.formatWarn = fw.replace("%fl", fl).replace("%ft", ft).replace("%fe", fe).replace("%esc","\u001B");
+        this.formatErr = fe.replace("%fl", fl).replace("%fw", fw).replace("%ft", ft).replace("%esc","\u001B");
 
         // DTF Stuff
         formatDate = fl.contains("%d");
