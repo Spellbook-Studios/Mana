@@ -8,14 +8,15 @@ import dk.sebsa.mana.Logger;
 import dk.sebsa.mana.impl.FormatBuilder;
 import dk.sebsa.mana.impl.FormatterImpl;
 import dk.sebsa.mana.impl.PrintStreamLogger;
+import org.xml.sax.SAXException;
 
 import java.io.IOException;
 
 public class Sandbox {
     private final Logger logger;
 
-    public Sandbox() throws IOException {
-        LogFormatter formatter = new FormatBuilder().buildFromFile("/Format.xml");
+    public Sandbox() throws IOException, SAXException {
+        LogFormatter formatter = new FormatBuilder().buildFromFile(FileUtils.loadFileFromJar("Format.xml"));
         logger = new PrintStreamLogger(System.out, formatter);
     }
 
@@ -26,7 +27,7 @@ public class Sandbox {
     public static void main(String[] args) {
         try {
             new Sandbox().run();
-        } catch (IOException e) {
+        } catch (IOException | SAXException e) {
             System.out.println("Program crashed without unhandled exception.");
         }
     }
