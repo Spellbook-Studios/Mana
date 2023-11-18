@@ -96,7 +96,7 @@ publishing {
 
 if (!version.endsWith("SNAPSHOT")) {
     signing {
-        sign publishing.publications.archives
+        sign publishing.publications.mavenJava
     }
 } else {
     signing.required = false
