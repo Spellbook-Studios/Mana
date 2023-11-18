@@ -1,6 +1,7 @@
 package dk.sebsa.mana.utils;
 
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -25,23 +26,9 @@ public class XMLUtils {
         }
     }
 
-    public static Document loadDocumentFromGenericFileLocation(String f) throws IOException {
+    public static Document loadDocumentFromInputStream(InputStream is) throws IOException, SAXException {
         init();
 
-        try {
-            if(f.startsWith("/")) {
-                f = f.replaceFirst("/", "");
-                ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-                InputStream inputStream = classLoader.getResourceAsStream(f);
-
-                return db.parse(inputStream);
-            } else {
-                File file = new File(f);
-
-                return db.parse(file);
-            }
-        } catch (Exception e) {
-            throw new FileNotFoundException("Mana, XMLUtils: Couldn't find logger file, " + f);
-        }
+        return db.parse(is);
     }
 }

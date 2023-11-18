@@ -5,8 +5,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 public class FormatBuilder {
     private String fFormat = "%s";
@@ -28,12 +30,12 @@ public class FormatBuilder {
         return formatter;
     }
 
-    public FormatterImpl buildFromFile(String f) throws IOException {
-        Document doc = XMLUtils.loadDocumentFromGenericFileLocation(f);
+    public FormatterImpl buildFromFile(InputStream is) throws IOException, SAXException {
+        Document doc = XMLUtils.loadDocumentFromInputStream(is);
 
         Element loggerElement = doc.getDocumentElement();
         loggerElement.normalize();
-        if(!loggerElement.getNodeName().equals("logger")) throw new RuntimeException("Root element of file " + f + " was not \"logger\"");
+        if(!loggerElement.getNodeName().equals("logger")) throw new RuntimeException("Root element of file was not \"logger\"");
 
         // Read all logger settings
         NodeList nodeList = loggerElement.getChildNodes();
