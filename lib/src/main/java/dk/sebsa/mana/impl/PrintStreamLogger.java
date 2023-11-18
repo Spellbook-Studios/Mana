@@ -5,10 +5,22 @@ import dk.sebsa.mana.Logger;
 
 import java.io.PrintStream;
 
+/**
+ * Logs to the provided PrintStream e.g. System.out
+ *
+ * @author sebs
+ */
 public class PrintStreamLogger implements Logger {
     private final PrintStream printStream;
+    /**
+     * The formatter used when logging
+     */
     public final LogFormatter formatter;
 
+    /**
+     * @param printStream PrintStream to log to
+     * @param formatter The format to use when logging
+     */
     public PrintStreamLogger(PrintStream printStream, LogFormatter formatter) {
         this.printStream = printStream;
         this.formatter = formatter;

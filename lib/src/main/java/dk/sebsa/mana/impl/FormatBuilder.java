@@ -10,12 +10,22 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Builds formats from files
+ *
+ * @author sebs
+ */
 public class FormatBuilder {
     private String fFormat = "%s";
     private String fTraceFormat = "%fi";
     private String fWarnFormat = "%fi";
     private String fErrorFormat = "%fi";
 
+    /**
+     * Build the formatter with the set configuration then resets itself
+     *
+     * @return The formatter
+     */
     public FormatterImpl build() {
         // Generate Logger
         FormatterImpl formatter = new FormatterImpl(fTraceFormat, fFormat, fWarnFormat, fErrorFormat);
@@ -30,12 +40,20 @@ public class FormatBuilder {
         return formatter;
     }
 
+    /**
+     * Loads formatter config from a XML file, then calls this.build() to build the logger
+     *
+     * @param is The XML file to laod the formatter from
+     * @return The new log formatter
+     * @throws IOException If any IO error occurs
+     * @throws SAXException If any parsing error occurs
+     */
     public FormatterImpl buildFromFile(InputStream is) throws IOException, SAXException {
         Document doc = XMLUtils.loadDocumentFromInputStream(is);
 
         Element loggerElement = doc.getDocumentElement();
         loggerElement.normalize();
-        if(!loggerElement.getNodeName().equals("logger")) throw new RuntimeException("Root element of file was not \"logger\"");
+        if(!loggerElement.getNodeName().equals("logger")) throw new SAXException("Root element of file was not \"logger\"");
 
         // Read all logger settings
         NodeList nodeList = loggerElement.getChildNodes();
